@@ -1,0 +1,22 @@
+use sakila;
+
+select *
+from film;
+
+select rental_duration
+from film;
+
+select distinct rental_duration
+from film;
+-- distinct is used to remove duplicates
+
+select distinct rental_duration as distinct_values
+from film;
+-- as = alias. it is used to give temporary names to our results displayed in given query
+
+-- operators
+select title, rental_duration
+from film
+where rental_duration=6;
+
+-- =,>,>=,<,<=,<>(different....displays all values except the given values)
