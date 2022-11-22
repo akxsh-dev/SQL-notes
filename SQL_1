@@ -1,0 +1,41 @@
+create database db1;
+-- to create a database
+
+use sakila;
+-- to use a database
+
+select *
+from actor;
+-- dispaly entire table contents
+
+create database students_info;
+use students_info;
+create table students(
+student_id int not null,
+first_name varchar(30) not null,
+last_name varchar(30),
+date_of_birth date,
+primary key(student_id));
+-- how to create a table
+
+create table courses(
+course_id int not null,
+course_name varchar(30),
+primary key(course_id));
+
+create table grades(
+grade_id int not null,
+student_id int,
+course_id int,
+grade float,
+foreign key(student_id) references students(student_id));
+
+alter table grades
+add primary key(grade_id);
+-- another method for adding
+
+drop table grades;
+-- removes table
+
+alter table grades
+add foreign key(course_id) references courses(course_id);
