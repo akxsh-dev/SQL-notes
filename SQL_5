@@ -1,0 +1,141 @@
+-- logical operators
+USE world;
+
+SELECT*
+FROM country;
+
+-- and, or, not
+
+SELECT name, population
+FROM country
+WHERE continent = 'asia' AND population > 100000000;
+
+SELECT name, population
+FROM country
+WHERE continent = 'asia' OR continent='africa';
+
+SELECT name, population
+FROM country
+WHERE population > 1000000000;
+
+SELECT name, population
+FROM country
+WHERE NOT population > 1000000000;
+
+SELECT name,continent,population
+FROM country
+WHERE(continent='asia' OR continent='africa') AND population > 100000000;
+
+
+SELECT name, continent, population
+FROM country
+WHERE continent IN ('asia','africa','europe');
+
+SELECT name, continent, population
+FROM country
+WHERE population BETWEEN 50000000 AND 100000000;
+-- used to define given range
+
+-- avg(), min(),count(),sum()
+SELECT*
+FROM country;
+
+SELECT AVG(LifeExpectancy)
+FROM country;
+
+SELECT MAX(LifeExpectancy)
+FROM country;
+
+SELECT MIN(LifeExpectancy)
+FROM country;
+
+SELECT COUNT(name) AS total
+FROM country;
+
+SELECT SUM(population) AS total_population
+FROM country;
+
+SELECT continent, SUM(population)
+FROM country
+GROUP BY continent;
+
+SELECT continent, SUM(population)
+FROM country
+GROUP BY continent
+ORDER BY SUM(population)ASC;
+-- asc ascending order
+
+SELECT 
+    continent, SUM(population)
+FROM
+    country
+GROUP BY continent
+ORDER BY SUM(population) DESC;
+-- sorts in descending order
+
+SELECT 
+    continent, SUM(population)
+FROM
+    country
+GROUP BY continent
+ORDER BY SUM(population) DESC
+LIMIT 3;
+
+-- displays top 3 rows
+SELECT continent, SUM(population)
+FROM country
+GROUP BY continent
+HAVING SUM(population)<700000000
+ORDER BY SUM(population)DESC;
+
+-- case statement
+
+SELECT name, population,
+CASE
+	WHEN population < 50000000 THEN 'population is less than 50 million'
+    WHEN population BETWEEN 50000000 AND 100000000 THEN 'population is between 50 m and 100m'
+    ELSE 'population is greater than 100m'
+END AS populationCategory
+FROM country;
+
+-- _ matches exactly one character, % matches any number of characters even 0 charaters
+
+
+SELECT *
+FROM city
+WHERE name LIKE '_____';
+
+SELECT *
+FROM city
+WHERE name LIKE '%c';
+-- displays all the names ending with c
+
+SELECT *
+FROM city
+WHERE name LIKE 'c%';
+-- displays all the names starting with cache index
+
+SELECT 
+    *
+FROM
+    city
+WHERE
+    name LIKE 'c___';
+-- displays city names with start with c and and has 4 charcters words
+
+SELECT 
+    *
+FROM
+    city
+WHERE
+    name LIKE 'c%t';
+    
+    -- displays city names that starts with c and ends with t
+
+SELECT 
+    *
+FROM
+    city
+WHERE
+    name LIKE '%th%';
+    -- displays all the city which has th in it
